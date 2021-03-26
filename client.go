@@ -68,7 +68,7 @@ func (x *Xchange) Request(method, action string, body []byte, out interface{}) (
 
 func (Xchange *Xchange) devProd() string {
 	if Xchange.Env == "develop" {
-		return "http://localhost:10002/node/v1"
+		return "http://api.sandbox.sc.xchange.ee/node/v1"
 	}
 	return "https://api.sc.xchange.ee/node/v1"
 }
