@@ -28,11 +28,13 @@ type DepositPagesQuery struct {
 }
 
 type DepositQuery struct {
-	To        int64  `json:"to"`
-	From      int64  `json:"from"`
-	Currency  string `json:"currency"`
-	CompanyID int64  `json:"-"`
-	WalletID  int64  `json:"wallet_id"`
+	To          int64  `json:"to"`
+	From        int64  `json:"from"`
+	UpdatedTo   int64  `json:"updated_to"`
+	UpdatedFrom int64  `json:"updated_from"`
+	Currency    string `json:"currency"`
+	CompanyID   int64  `json:"-"`
+	WalletID    int64  `json:"wallet_id"`
 }
 type DepositOrderBy struct {
 	Field     string `json:"field"`
