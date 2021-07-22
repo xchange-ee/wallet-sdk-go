@@ -2,6 +2,7 @@ package xchange
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -49,6 +50,19 @@ func (x *Wallet) Create(req WalletRequest) (*WalletResponse, *Error, error) {
 	data, _ := json.Marshal(req)
 	var response *WalletResponse
 	err, errAPI := x.client.Request("POST", "/api/wallet", data, &response)
+	if err != nil {
+		return nil, nil, err
+	}
+	if errAPI != nil {
+		return nil, errAPI, nil
+	}
+	return response, nil, nil
+}
+
+//GetWallet - create a new wallet
+func (x *Wallet) Get(id int32) (*WalletResponse, *Error, error) {
+	var response *WalletResponse
+	err, errAPI := x.client.Request("GET", fmt.Sprintf("/api/wallet/%d", id), nil, &response)
 	if err != nil {
 		return nil, nil, err
 	}
