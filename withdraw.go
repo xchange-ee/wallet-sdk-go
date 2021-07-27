@@ -2,6 +2,7 @@ package xchange
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -71,7 +72,6 @@ func (c *Xchange) Withdraw() *Withdraw {
 	return &Withdraw{client: c}
 }
 
-//Create - criar um brcode stático
 func (x *Withdraw) List(req WithdrawPagesQuery) (*WithdrawPagesResponse, *Error, error) {
 	data, _ := json.Marshal(req)
 	var response *WithdrawPagesResponse
@@ -85,11 +85,22 @@ func (x *Withdraw) List(req WithdrawPagesQuery) (*WithdrawPagesResponse, *Error,
 	return response, nil, nil
 }
 
-//Create - criar um brcode stático
 func (x *Withdraw) Create(req CreateWithdraw) (*WithdrawItem, *Error, error) {
 	data, _ := json.Marshal(req)
 	var response *WithdrawItem
 	err, errAPI := x.client.Request("POST", "/api/withdraw", data, &response)
+	if err != nil {
+		return nil, nil, err
+	}
+	if errAPI != nil {
+		return nil, errAPI, nil
+	}
+	return response, nil, nil
+}
+
+func (x *Withdraw) Get(id int32) (*WithdrawItem, *Error, error) {
+	var response *WithdrawItem
+	err, errAPI := x.client.Request("POST", fmt.Sprintf("/api/withdraw/%d", id), nil, &response)
 	if err != nil {
 		return nil, nil, err
 	}

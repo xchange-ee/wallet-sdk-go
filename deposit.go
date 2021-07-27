@@ -58,7 +58,6 @@ func (c *Xchange) Deposit() *Deposit {
 	return &Deposit{client: c}
 }
 
-//Create - criar um brcode stático
 func (x *Deposit) List(req DepositPagesQuery) (*DepositPagesResponse, *Error, error) {
 	data, _ := json.Marshal(req)
 	var response *DepositPagesResponse

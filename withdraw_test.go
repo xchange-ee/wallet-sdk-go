@@ -58,3 +58,22 @@ func TestCreate(t *testing.T) {
 	}
 
 }
+
+func TestGet(t *testing.T) {
+	godotenv.Load(".env.test")
+	client := xchange.NewClient(os.Getenv("XCHANGE_TOKEN"), os.Getenv("ENV"))
+	WithdrawPagesResponse, errAPI, err := client.Withdraw().Get(3)
+	if err != nil {
+		t.Errorf("err : %s", err)
+		return
+	}
+	if errAPI != nil {
+		t.Errorf("errAPI : %#v", errAPI)
+		return
+	}
+	if WithdrawPagesResponse == nil {
+		t.Error("payResponse is null")
+		return
+	}
+
+}
